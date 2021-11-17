@@ -50,7 +50,7 @@ class Vite
      */
     public static function redirectAssets(): void
     {
-        if (! App::environment('local')) {
+        if (! App::environment('dev')) {
             return;
         }
 
@@ -156,7 +156,7 @@ class Vite
                 if (is_dir($fileOrDirectory)) {
                     return File::files($fileOrDirectory);
                 }
-                
+
                 return [new \SplFileInfo($fileOrDirectory)];
             })
             ->unique(fn (\SplFileInfo $file) => $file->getPathname())
@@ -193,7 +193,7 @@ class Vite
             return false;
         }
 
-        if (! App::environment('local')) {
+        if (! App::environment('dev')) {
             return true;
         }
 

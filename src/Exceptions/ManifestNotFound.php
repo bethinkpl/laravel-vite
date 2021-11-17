@@ -8,7 +8,7 @@ class ManifestNotFound extends \Exception
 {
     public function __construct(string $path)
     {
-        $hint = App::environment('local')
+        $hint = App::environment('dev')
             ? 'Did you start the development server?'
             : 'Did you run the build command?';
 

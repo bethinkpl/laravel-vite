@@ -2,7 +2,7 @@
 
 use Innocenzi\Vite\Exceptions\ManifestNotFound;
 
-beforeEach(fn () => set_env('local'));
+beforeEach(fn () => set_env('dev'));
 
 it('uses the development server if it is started in a local environment', function () {
     with_dev_server(function () {

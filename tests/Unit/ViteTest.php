@@ -12,13 +12,13 @@ beforeEach(fn () => start_dev_server());
 afterEach(fn () => stop_dev_server());
 
 it('generates the client script in a local environment', function () {
-    set_env('local');
+    set_env('dev');
     expect(get_vite()->getClientScript())
         ->toEqual('<script type="module" src="http://localhost:3000/@vite/client"></script>');
 });
 
 it('generates an entry script in a local environment', function () {
-    set_env('local');
+    set_env('dev');
     expect(get_vite()->getEntry('some/path/script.ts'))
         ->toEqual('<script type="module" src="http://localhost:3000/some/path/script.ts"></script>');
 });
@@ -41,7 +41,7 @@ it('generates scripts and css from an entry point in a production environment', 
 });
 
 it('finds an entrypoint by its name when its directory is registered in the configuration in a local environment', function () {
-    set_env('local');
+    set_env('dev');
     Config::set('vite.entrypoints', 'scripts');
     App::setBasePath(__DIR__);
     expect(get_vite('entry.json')->getEntry('entry.ts'))
@@ -57,7 +57,7 @@ it('finds an entrypoint by its name when its directory is registered in the conf
 });
 
 it('finds every entrypoints and generates their tags along with the client in a development environment', function () {
-    set_env('local');
+    set_env('dev');
     Config::set('vite.entrypoints', 'scripts');
     App::setBasePath(__DIR__);
     expect(get_vite()->getClientAndEntrypointTags())
@@ -68,7 +68,7 @@ it('finds every entrypoints and generates their tags along with the client in a 
 });
 
 it('finds a specific entrypoint by path from the configuration', function () {
-    set_env('local');
+    set_env('dev');
     Config::set('vite.entrypoints', 'scripts-dts/entry.ts');
     App::setBasePath(__DIR__);
     expect(get_vite()->getClientAndEntrypointTags())
@@ -79,7 +79,7 @@ it('finds a specific entrypoint by path from the configuration', function () {
 });
 
 it('filters out entrypoints from the configuration', function () {
-    set_env('local');
+    set_env('dev');
     Config::set('vite.entrypoints', 'scripts-dts');
     Config::set('vite.ignore_pattern', '');
     App::setBasePath(__DIR__);
