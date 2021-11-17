@@ -2,27 +2,10 @@
 
 namespace Innocenzi\Vite\Exceptions;
 
-use Facade\IgnitionContracts\BaseSolution;
-use Facade\IgnitionContracts\ProvidesSolution;
-use Facade\IgnitionContracts\Solution;
-
-class NoSuchEntrypointException extends ViteException implements ProvidesSolution
+class NoSuchEntrypointException extends \Exception
 {
-    protected $entry;
-
-    public function __construct($entry)
+    public function __construct(string $entry)
     {
-        $this->entry = (string) $entry;
-        $this->message = "Entry '{$this->entry}' does not exist in the manifest.";
-    }
-
-    public function getSolution(): Solution
-    {
-        return BaseSolution::create("Add it to your configuration")
-            ->setSolutionDescription('That entry point should be defined by the `vite.entrypoints` configuration option.')
-            ->setDocumentationLinks([
-                'About entrypoints' => 'https://laravel-vite.innocenzi.dev/guide/usage.html#entrypoints',
-                'Configuring entrypoints' => 'https://laravel-vite.innocenzi.dev/guide/configuration.html#options',
-            ]);
+        $this->message = "'${entry}' does not exist in the manifest. Make sure you added an entry point in the Vite configuration.";
     }
 }
